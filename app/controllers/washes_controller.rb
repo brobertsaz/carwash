@@ -11,6 +11,9 @@ class WashesController < ApplicationController
     if @wash.save
       flash[:success] = "Thanks, your total is #{@total}"
       redirect_back(fallback_location: root_path)
+    else
+      flash[:error] = "Something horrifically went wrong..."
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -21,7 +24,7 @@ class WashesController < ApplicationController
 
   def calculate_total
     total = 0
-    if wash_params[:muddy_bed] == '1'
+    if @wash.muddy_bed == '1'
       total += 2
     end
 
