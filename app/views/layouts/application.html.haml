@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Carwash
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+    .row
+      .col-sm-12
+        .container
+          .header
+            %h2 Easy Wash
+          .col-sm-6.offset-sm-3
+            .jumbotron
+              - flash.each do |type, message|
+                .alert.alert-dismissable{ :class => twitterized_type(type) }
+                  = message
+                  %button.close{ data: { dismiss: 'alert' } } x
+
+              %h3 Purchase a Wash
+              = yield

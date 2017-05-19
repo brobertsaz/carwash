@@ -1,0 +1,9 @@
+= simple_form_for @wash do |f|
+  = f.hidden_field :basic_fee, value: ""
+  = f.simple_fields_for(:vehicle_washes) do |washes_form|
+    = washes_form.simple_fields_for(:vehicle) do |vehicle_form|
+      = vehicle_form.input :vehicle_type, collection: ['Truck','Car'], label: "Vehicle Type"
+      = vehicle_form.input :license_plate
+      = vehicle_form.input :tailgate_up, as: :boolean, input_html: { class: "truck-related" }, label_html: { class: "truck-related" }
+  = f.input :muddy_bed, as: :boolean, input_html: { class: "truck-related" }, label_html: { class: "truck-related" }
+  = f.button :submit, "Purchase", class: 'btn-primary'

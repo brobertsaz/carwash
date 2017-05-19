@@ -13,5 +13,18 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery
-//= require bootstrap-sprockets
+//= require tether
+//= require bootstrap
 //= require_tree .
+
+$( document ).ready(function() {
+  $("#wash_vehicle_washes_vehicle_vehicle_type").on("change", function() {
+    if ($(this).val() == "Truck") {
+      $("#wash_basic_fee").val("10.00");
+      $(".truck-related").css("display", "block");
+    } else {
+      $("#wash_basic_fee").val("5.00");
+      $(".truck-related").css("display", "none");
+    }
+  });
+});
