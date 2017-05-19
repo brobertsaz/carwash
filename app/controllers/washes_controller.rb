@@ -35,6 +35,8 @@ class WashesController < ApplicationController
 
   def vehicle_search
     license_plate = wash_params[:vehicle_washes][:vehicle][:license_plate]
+    validate_not_stolen(license_plate)
+
     @vehicle = Vehicle.find_by_license_plate(license_plate)
     unless @vehicle
       @vehicle = Vehicle.create wash_params[:vehicle_washes][:vehicle]
@@ -42,6 +44,13 @@ class WashesController < ApplicationController
         flash[:error] = @vehicle.errors.full_messages.to_sentence
         redirect_back(fallback_location: root_path)
       end
+    end
+  end
+
+  def validate_not_stolen(plate)
+    if plate == '1111111'
+      flash[:error] = "Stolen Vehicle, call the cops!!!!!"
+      redirect_back(fallback_location: root_path)
     end
   end
 
